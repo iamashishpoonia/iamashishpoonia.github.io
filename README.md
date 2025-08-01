@@ -1,6 +1,6 @@
 # Academic Personal Website
 
-This project is a personal webpage designed to showcase the work and personal details of a PhD student in mathematics. The website is structured to provide an academic-friendly aesthetic while being informative and easy to navigate.
+This project is a personal webpage.
 
 ## Project Structure
 
@@ -16,13 +16,11 @@ The project consists of the following files and directories:
   - **research.html**: Details about research work and publications.
   - **activities.html**: Information about academic and extracurricular activities.
   - **resources.html**: Links and information about relevant resources.
-  - **interests.html**: Showcases personal interests and hobbies.
+  - **interests.html**: Showcases personal interests.
   - **contact.html**: Provides contact details and a form for inquiries.
 - **assets/**: Contains various assets used in the website.
-  - **images/**: Directory for images, including a profile photo.
-    - **profile-photo.placeholder**: Placeholder for the user's profile photo.
+  - **images/**: Directory for images.
   - **docs/**: Directory for documents.
-    - **cv.placeholder**: Placeholder for the user's CV document.
   - **fonts/**: Directory for custom fonts used in the design.
 - **README.md**: Documentation for the project, including setup instructions and features.
 
