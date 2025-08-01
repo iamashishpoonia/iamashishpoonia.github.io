@@ -101,14 +101,14 @@
         transform: scale(0.95);
         opacity: 0;
         transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        z-index: 999999;
+        z-index: 9999999 !important;
         padding: 0.5rem 0;
         margin-top: 5px;
     }
     
     /* Ensure dropdown appears above hero section elements */
     .hero-header .mobile-nav-overlay {
-        z-index: 999999 !important;
+        z-index: 9999999 !important;
         position: absolute !important;
     }
     
@@ -390,4 +390,38 @@ body.mobile-nav-open .mobile-nav-backdrop {
 @keyframes fadeBgIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+/* Targeted mobile dropdown fix for GitHub Pages - NO profile picture changes */
+
+/* Ultra-high z-index for dropdown only */
+.mobile-nav-overlay.active {
+    z-index: 9999999 !important;
+    position: absolute !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: scale(1) !important;
+    display: block !important;
+}
+
+/* Specific fix for homepage dropdown with ultra-high specificity */
+html body .hero-header .container .mobile-nav-overlay.active,
+body .hero-header .mobile-nav-overlay.active,
+.hero-header .mobile-nav-overlay.active {
+    z-index: 9999999 !important;
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+    display: block !important;
+}
+
+/* Fix Safari and iOS-specific rendering for dropdown only */
+@supports (-webkit-touch-callout: none) {
+    .mobile-nav-overlay.active {
+        transform: translateZ(0) scale(1) !important;
+        -webkit-transform: translateZ(0) scale(1) !important;
+    }
 }
