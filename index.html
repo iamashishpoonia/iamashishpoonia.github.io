@@ -63,7 +63,7 @@
                         <a href="index.html" class="hero-title">ASHISH POONIA</a>
                     </div>
                     
-                    <button id="hero-nav-toggle" class="mobile-nav-toggle d-md-none">
+                    <button id="mobile-nav-toggle" class="mobile-nav-toggle d-md-none">
                         <i class="fas fa-bars"></i>
                     </button>
                     
@@ -103,7 +103,7 @@
                 <div class="social-icons my-4">
                     <a href="mailto:apoonia@iitg.ac.in" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
                     <a href="https://www.linkedin.com/in/iamashishpoonia" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/ashishpoonia" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://github.com/iamashishpoonia" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://scholar.google.com/citations?user=Uazlop8AAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
                     <a href="https://www.researchgate.net/profile/Ashish-Poonia-2?ev=hdr_xprf" target="_blank" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
                 </div>
@@ -116,27 +116,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     
     <!-- Custom JavaScript -->
-    <script src="js/main.js"></script>
+    <script src="js/mobile-nav.js"></script>
     <script src="js/animations.js"></script>
-    
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add page loaded class for transition effects
-            setTimeout(function() {
-                document.body.classList.add('page-loaded');
-            }, 100);
-            
-            // Mobile Navigation for Hero Header
-            const heroNavToggle = document.getElementById('hero-nav-toggle');
-            const heroNavMenu = document.querySelector('.hero-navigation');
-            
-            if (heroNavToggle) {
-                heroNavToggle.addEventListener('click', function() {
-                    heroNavMenu.classList.toggle('d-none');
-                    heroNavMenu.classList.toggle('d-block');
-                });
-            }
-        });
+        // Math background effect
+        setTimeout(() => {
+            document.querySelector('.math-background').style.opacity = '1';
+        }, 100);
     </script>
 </body>
 </html>
