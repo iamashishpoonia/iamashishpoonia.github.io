@@ -1,15 +1,44 @@
-/* Mobile Navigation - Uniform across all pages */
+/* 
+ * Clean Mobile Navigation - Fresh Start
+ */
 
-/* Hide mobile nav on desktop */
+/* Ensure mobile nav overlay is never visible on desktop */
 @media (min-width: 769px) {
     .mobile-nav-overlay {
         display: none !important;
+        visibility: hidden !important;
     }
 }
 
-/* Mobile Navigation */
+/* Mobile Navigation - Simple & Clean */
 @media (max-width: 768px) {
-    /* Mobile toggle button */
+    /* Mobile/* Premium background dimming effect */
+.mobile-nav-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 9980;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-nav-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+body.mobile-nav-open .mobile-nav-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+    /* Mobile toggle button - Premium Minimalist */
     .mobile-nav-toggle,
     .hero-header .mobile-nav-toggle,
     .site-header .mobile-nav-toggle {
@@ -30,17 +59,39 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
     
+    /* Override Bootstrap d-md-none for testing */
     .mobile-nav-toggle.d-md-none {
         display: block !important;
     }
     
     .mobile-nav-toggle:hover,
-    .mobile-nav-toggle:focus {
+    .hero-header .mobile-nav-toggle:hover,
+    .site-header .mobile-nav-toggle:hover {
         color: #3498db;
         background: rgba(255, 255, 255, 1);
         transform: scale(1.05);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .mobile-nav-toggle:focus,
+    .hero-header .mobile-nav-toggle:focus,
+    .site-header .mobile-nav-toggle:focus {
         outline: none;
+        color: #3498db;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Ensure header wrapper alignment is perfect */
+    .header-wrapper,
+    .hero-header-wrapper {
+        align-items: center !important;
+    }
+    
+    .site-branding,
+    .hero-branding {
+        display: flex;
+        align-items: center;
     }
     
     /* Hide desktop navigation on mobile */
@@ -49,38 +100,90 @@
         display: none;
     }
     
-    /* Mobile dropdown - uniform positioning using fixed positioning */
-    .mobile-nav-overlay {
-        position: fixed !important;
-        top: 60px !important;
-        right: 10px !important;
+    /* Mobile navigation overlay - Premium Design */
+    .mobile-nav-overlay,
+    .hero-header .mobile-nav-overlay,
+    .site-header .mobile-nav-overlay {
+        display: none;
+        position: absolute !important;
+        top: 100% !important;
+        right: 0 !important;
         width: 240px;
-        max-width: calc(100vw - 20px);
+        max-width: calc(100vw - 30px);
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
         
-        /* Styling */
-        background: rgba(255, 255, 255, 0.96);
-        backdrop-filter: blur(8px);
+        /* Premium aesthetics */
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(8px) saturate(180%);
+        -webkit-backdrop-filter: blur(8px) saturate(180%);
+        
+        /* Premium borders and shadows */
         border: 1px solid rgba(209, 213, 219, 0.3);
         border-radius: 12px;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
                     0 4px 6px -2px rgba(0, 0, 0, 0.05);
         
-        /* Animation */
+        /* Premium animations */
+        transform-origin: top right;
+        transform: scale(0.95);
         opacity: 0;
-        transform: scale(0.95) translateY(-10px);
         transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        visibility: hidden;
-        z-index: 9999;
+        z-index: 99999 !important;
         padding: 0.5rem 0;
+        margin-top: 5px;
+    }
+    
+    /* Ensure both header types handle the mobile nav consistently */
+    .hero-header,
+    .site-header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 9990;
+        overflow: visible !important;
+    }
+    
+    /* Ensure header containers allow dropdown overflow */
+    .hero-header .container,
+    .site-header .container {
+        position: relative;
+        overflow: visible !important;
+    }
+    
+    /* Ensure header wrappers allow dropdown overflow */
+    .hero-header-wrapper,
+    .header-wrapper {
+        position: relative;
+        overflow: visible !important;
     }
     
     .mobile-nav-overlay.active {
+        display: block;
+        transform: scale(1);
         opacity: 1;
-        transform: scale(1) translateY(0);
-        visibility: visible;
+        animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    /* Mobile navigation menu */
+    /* Debug: Ensure dropdown is visible */
+    .mobile-nav-overlay.active {
+        visibility: visible !important;
+        display: block !important;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: scale(0.95) translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+    
+    /* Mobile navigation menu - Premium Style */
     .mobile-nav-menu {
         list-style: none;
         padding: 0;
@@ -108,9 +211,24 @@
         text-align: left;
     }
     
+    .mobile-nav-menu a::after {
+        content: '';
+        position: absolute;
+        left: 1.25rem;
+        bottom: 0.7rem;
+        height: 2px;
+        width: 0;
+        background: #3498db;
+        transition: width 0.2s ease;
+    }
+    
     .mobile-nav-menu a:hover {
         color: #3498db;
         background: rgba(236, 240, 241, 0.6);
+    }
+    
+    .mobile-nav-menu a:hover::after {
+        width: 20px;
     }
     
     .mobile-nav-menu a.active {
@@ -119,26 +237,7 @@
     }
 }
 
-/* Backdrop for mobile menu */
-.mobile-nav-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    z-index: 9998;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-
-body.mobile-nav-open .mobile-nav-backdrop {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* Responsive content styles */
+/* Keep existing responsive styles for content */
 @media (max-width: 991.98px) {
     h1 { font-size: 2.5rem; }
     h2 { font-size: 1.8rem; }
@@ -266,4 +365,58 @@ body.mobile-nav-open .mobile-nav-backdrop {
         padding: 6px 8px;
         font-size: 1.2rem;
     }
+}
+
+/* Premium background dimming effect */
+.mobile-nav-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 9980;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+body.mobile-nav-open .mobile-nav-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Keep header visible but allow background scrolling */
+.site-header,
+.hero-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9990;
+    overflow: visible;
+}
+
+/* Special handling for hero background section to allow dropdown overflow */
+.hero-background-section {
+    overflow: visible !important;
+}
+
+/* Make header container relative for dropdown positioning */
+.site-header .container,
+.hero-header .container {
+    position: relative;
+    overflow: visible;
+}
+
+/* Ensure header wrapper allows dropdown overflow */
+.header-wrapper,
+.hero-header-wrapper {
+    overflow: visible;
+    position: relative;
+}
+
+@keyframes fadeBgIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

@@ -83,14 +83,25 @@ function createMobileNavigation() {
     // Assemble overlay (just the menu, no close button)
     mobileOverlay.appendChild(mobileMenu);
     
-    // Always attach to body with fixed positioning - same as other pages working approach
-    mobileOverlay.style.position = 'fixed';
-    mobileOverlay.style.top = '60px';
-    mobileOverlay.style.right = '10px';
-    mobileOverlay.style.zIndex = '9999999';
+    // Attach to the appropriate header container for proper positioning
+    let headerContainer = document.querySelector('.site-header .container:not(.d-none)');
     
-    document.body.appendChild(mobileOverlay);
-    console.log('Mobile dropdown attached to body with fixed positioning');
+    // If site-header is hidden or not found, try the hero-header container
+    if (!headerContainer || headerContainer.closest('.d-none')) {
+        headerContainer = document.querySelector('.hero-header .container');
+    }
+    
+    if (headerContainer) {
+        console.log('Adding dropdown to header container for proper positioning');
+        headerContainer.appendChild(mobileOverlay);
+    } else {
+        console.log('Adding dropdown to body (fallback)');
+        // Fallback to body with fixed positioning
+        mobileOverlay.style.position = 'fixed';
+        mobileOverlay.style.top = '60px';
+        mobileOverlay.style.right = '15px';
+        document.body.appendChild(mobileOverlay);
+    }
 }
 
 function setupMobileNavigation() {
@@ -119,10 +130,17 @@ function setupMobileNavigation() {
 
 function openMobileNav() {
     const overlay = document.querySelector('.mobile-nav-overlay');
+    const backdrop = document.querySelector('.mobile-nav-backdrop');
+    
     if (overlay) {
         // Add classes to control display without locking scroll
         overlay.classList.add('active');
         document.body.classList.add('mobile-nav-open');
+        
+        // Activate backdrop
+        if (backdrop) {
+            backdrop.classList.add('active');
+        }
         
         // Update toggle button icon to cross (X)
         const toggleButtons = document.querySelectorAll('.mobile-nav-toggle i, #mobile-nav-toggle i');
@@ -136,10 +154,17 @@ function openMobileNav() {
 
 function closeMobileNav() {
     const overlay = document.querySelector('.mobile-nav-overlay');
+    const backdrop = document.querySelector('.mobile-nav-backdrop');
+    
     if (overlay) {
         // Remove classes
         overlay.classList.remove('active');
         document.body.classList.remove('mobile-nav-open');
+        
+        // Deactivate backdrop
+        if (backdrop) {
+            backdrop.classList.remove('active');
+        }
         
         // Update toggle button icon back to hamburger menu
         const toggleButtons = document.querySelectorAll('.mobile-nav-toggle i, #mobile-nav-toggle i');
