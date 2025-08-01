@@ -1,12 +1,19 @@
 /* 
- * Simple Mobile Navigation - Fresh Start
+ * Homepage-Specific Mobile Navigation - Dedicated Solution
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Determine if this is the homepage
+    const isHomepage = document.querySelector('.hero-header') !== null;
+    
     // Only create mobile navigation on mobile devices
     if (isMobileDevice()) {
-        createMobileNavigation();
-        setupMobileNavigation();
+        if (isHomepage) {
+            createHomepageMobileNav();
+        } else {
+            createSubpageMobileNav();
+        }
+        setupMobileNavListeners();
     }
 });
 
@@ -17,43 +24,106 @@ function isMobileDevice() {
 
 // Listen for window resize to handle orientation changes
 window.addEventListener('resize', function() {
-    const overlay = document.querySelector('.mobile-nav-overlay');
+    const overlay = document.querySelector('.mobile-nav-overlay, .homepage-mobile-nav');
     
     if (window.innerWidth > 768) {
         // Desktop mode - remove mobile overlay if it exists
         if (overlay) {
             overlay.remove();
         }
+        // Remove backdrop
+        const backdrop = document.querySelector('.mobile-nav-backdrop, .homepage-backdrop');
+        if (backdrop) {
+            backdrop.remove();
+        }
         // Restore scrolling and remove mobile nav class
         document.body.style.overflow = '';
         document.body.classList.remove('mobile-nav-open');
     } else {
         // Mobile mode - create overlay if it doesn't exist
-        if (!overlay && !document.querySelector('.mobile-nav-overlay')) {
-            createMobileNavigation();
-            setupMobileNavigation();
+        if (!overlay) {
+            const isHomepage = document.querySelector('.hero-header') !== null;
+            if (isHomepage) {
+                createHomepageMobileNav();
+            } else {
+                createSubpageMobileNav();
+            }
+            setupMobileNavListeners();
         }
     }
 });
 
-function createMobileNavigation() {
+// Homepage-specific mobile navigation
+function createHomepageMobileNav() {
+    // Check if homepage mobile nav already exists
+    if (document.querySelector('.homepage-mobile-nav')) {
+        return;
+    }
+    
+    // Create backdrop for homepage
+    const backdrop = document.createElement('div');
+    backdrop.className = 'mobile-nav-backdrop homepage-backdrop';
+    backdrop.addEventListener('click', closeHomepageMobileNav);
+    document.body.appendChild(backdrop);
+    
+    // Get navigation links from hero nav
+    const heroNav = document.querySelector('.hero-navigation ul, .hero-nav-menu');
+    
+    if (!heroNav) {
+        console.warn('Hero navigation not found on homepage');
+        return;
+    }
+    
+    // Create mobile overlay specifically for homepage
+    const mobileOverlay = document.createElement('div');
+    mobileOverlay.className = 'mobile-nav-overlay homepage-mobile-nav';
+    
+    // Create mobile menu
+    const mobileMenu = document.createElement('ul');
+    mobileMenu.className = 'mobile-nav-menu';
+    
+    // Copy links from hero navigation
+    const links = heroNav.querySelectorAll('a');
+    links.forEach(link => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = link.href;
+        a.textContent = link.textContent;
+        if (link.classList.contains('active')) {
+            a.classList.add('active');
+        }
+        a.addEventListener('click', closeHomepageMobileNav);
+        li.appendChild(a);
+        mobileMenu.appendChild(li);
+    });
+    
+    // Assemble overlay
+    mobileOverlay.appendChild(mobileMenu);
+    document.body.appendChild(mobileOverlay);
+    
+    console.log('Homepage mobile navigation created');
+}
+
+// Subpage mobile navigation (existing implementation)
+function createSubpageMobileNav() {
     // Check if mobile overlay already exists
-    if (document.querySelector('.mobile-nav-overlay')) {
+    if (document.querySelector('.mobile-nav-overlay:not(.homepage-mobile-nav)')) {
         return;
     }
     
     // Create backdrop for clicking outside
     const backdrop = document.createElement('div');
     backdrop.className = 'mobile-nav-backdrop';
-    backdrop.addEventListener('click', closeMobileNav);
+    backdrop.addEventListener('click', closeSubpageMobileNav);
     document.body.appendChild(backdrop);
     
     // Get navigation links from existing nav (prioritize main nav, fallback to hero nav)
     const mainNav = document.querySelector('.main-navigation ul, .main-navigation #nav-menu');
-    const heroNav = document.querySelector('.hero-navigation ul, .hero-navigation .hero-nav-menu');
+    const heroNav = document.querySelector('.hero-navigation ul, .hero-nav-menu');
     const navLinks = mainNav || heroNav;
     
     if (!navLinks) {
+        console.warn('Navigation not found on subpage');
         return;
     }
     
@@ -75,12 +145,12 @@ function createMobileNavigation() {
         if (link.classList.contains('active')) {
             a.classList.add('active');
         }
-        a.onclick = closeMobileNav; // Close menu when link is clicked
+        a.addEventListener('click', closeSubpageMobileNav);
         li.appendChild(a);
         mobileMenu.appendChild(li);
     });
     
-    // Assemble overlay (just the menu, no close button)
+    // Assemble overlay
     mobileOverlay.appendChild(mobileMenu);
     
     // Attach to the appropriate header container for proper positioning
@@ -102,96 +172,168 @@ function createMobileNavigation() {
         mobileOverlay.style.right = '15px';
         document.body.appendChild(mobileOverlay);
     }
+    
+    console.log('Subpage mobile navigation created');
 }
 
-function setupMobileNavigation() {
-    // Find all mobile toggle buttons
-    const toggleButtons = document.querySelectorAll(
-        '.mobile-nav-toggle, #mobile-nav-toggle'
-    );
+// Setup event listeners for toggle buttons
+function setupMobileNavListeners() {
+    // Get all mobile nav toggle buttons
+    const toggleButtons = document.querySelectorAll('.mobile-nav-toggle, #mobile-nav-toggle');
     
-    toggleButtons.forEach((button) => {
+    toggleButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
-            // Check if navigation is currently open
-            const overlay = document.querySelector('.mobile-nav-overlay');
-            if (overlay && overlay.classList.contains('active')) {
-                // If open, close it
-                closeMobileNav();
+            // Determine if we're on homepage
+            const isHomepage = document.querySelector('.hero-header') !== null;
+            
+            if (isHomepage) {
+                toggleHomepageMobileNav();
             } else {
-                // If closed, open it
-                openMobileNav();
+                toggleSubpageMobileNav();
             }
         });
     });
 }
 
-function openMobileNav() {
-    const overlay = document.querySelector('.mobile-nav-overlay');
-    const backdrop = document.querySelector('.mobile-nav-backdrop');
+// Homepage-specific toggle functions
+function toggleHomepageMobileNav() {
+    const overlay = document.querySelector('.homepage-mobile-nav');
+    const backdrop = document.querySelector('.homepage-backdrop');
     
-    if (overlay) {
-        // Add classes to control display without locking scroll
-        overlay.classList.add('active');
-        document.body.classList.add('mobile-nav-open');
-        
-        // Activate backdrop
-        if (backdrop) {
-            backdrop.classList.add('active');
-        }
-        
-        // Update toggle button icon to cross (X)
-        const toggleButtons = document.querySelectorAll('.mobile-nav-toggle i, #mobile-nav-toggle i');
-        toggleButtons.forEach(button => {
-            if (button) {
-                button.className = 'fas fa-times';
-            }
-        });
+    if (!overlay || !backdrop) {
+        console.warn('Homepage mobile nav elements not found');
+        return;
+    }
+    
+    if (overlay.classList.contains('active')) {
+        closeHomepageMobileNav();
+    } else {
+        openHomepageMobileNav();
     }
 }
 
-function closeMobileNav() {
-    const overlay = document.querySelector('.mobile-nav-overlay');
-    const backdrop = document.querySelector('.mobile-nav-backdrop');
+function openHomepageMobileNav() {
+    const overlay = document.querySelector('.homepage-mobile-nav');
+    const backdrop = document.querySelector('.homepage-backdrop');
     
     if (overlay) {
-        // Remove classes
+        overlay.classList.add('active');
+    }
+    if (backdrop) {
+        backdrop.classList.add('active');
+    }
+    
+    // Update toggle button icon to cross (X)
+    const toggleButtons = document.querySelectorAll('.mobile-nav-toggle i, #mobile-nav-toggle i');
+    toggleButtons.forEach(button => {
+        if (button) {
+            button.className = 'fas fa-times';
+        }
+    });
+}
+
+function closeHomepageMobileNav() {
+    const overlay = document.querySelector('.homepage-mobile-nav');
+    const backdrop = document.querySelector('.homepage-backdrop');
+    
+    if (overlay) {
+        overlay.classList.remove('active');
+    }
+    if (backdrop) {
+        backdrop.classList.remove('active');
+    }
+    
+    // Update toggle button icon back to hamburger menu
+    const toggleButtons = document.querySelectorAll('.mobile-nav-toggle i, #mobile-nav-toggle i');
+    toggleButtons.forEach(button => {
+        if (button) {
+            button.className = 'fas fa-bars';
+        }
+    });
+}
+
+// Subpage-specific toggle functions
+function toggleSubpageMobileNav() {
+    const overlay = document.querySelector('.mobile-nav-overlay:not(.homepage-mobile-nav)');
+    if (overlay && overlay.classList.contains('active')) {
+        closeSubpageMobileNav();
+    } else {
+        openSubpageMobileNav();
+    }
+}
+
+function openSubpageMobileNav() {
+    const overlay = document.querySelector('.mobile-nav-overlay:not(.homepage-mobile-nav)');
+    const backdrop = document.querySelector('.mobile-nav-backdrop:not(.homepage-backdrop)');
+    
+    if (overlay) {
+        overlay.classList.add('active');
+        document.body.classList.add('mobile-nav-open');
+    }
+    
+    if (backdrop) {
+        backdrop.classList.add('active');
+    }
+    
+    // Update toggle button icon to cross (X)
+    const toggleButtons = document.querySelectorAll('.mobile-nav-toggle i, #mobile-nav-toggle i');
+    toggleButtons.forEach(button => {
+        if (button) {
+            button.className = 'fas fa-times';
+        }
+    });
+}
+
+function closeSubpageMobileNav() {
+    const overlay = document.querySelector('.mobile-nav-overlay:not(.homepage-mobile-nav)');
+    const backdrop = document.querySelector('.mobile-nav-backdrop:not(.homepage-backdrop)');
+    
+    if (overlay) {
         overlay.classList.remove('active');
         document.body.classList.remove('mobile-nav-open');
-        
-        // Deactivate backdrop
-        if (backdrop) {
-            backdrop.classList.remove('active');
-        }
-        
-        // Update toggle button icon back to hamburger menu
-        const toggleButtons = document.querySelectorAll('.mobile-nav-toggle i, #mobile-nav-toggle i');
-        toggleButtons.forEach(button => {
-            if (button) {
-                button.className = 'fas fa-bars';
-            }
-        });
     }
+    
+    if (backdrop) {
+        backdrop.classList.remove('active');
+    }
+    
+    // Update toggle button icon back to hamburger menu
+    const toggleButtons = document.querySelectorAll('.mobile-nav-toggle i, #mobile-nav-toggle i');
+    toggleButtons.forEach(button => {
+        if (button) {
+            button.className = 'fas fa-bars';
+        }
+    });
 }
 
 // Close mobile nav when clicking outside or pressing escape
 document.addEventListener('click', function(e) {
-    const overlay = document.querySelector('.mobile-nav-overlay');
-    const backdrop = document.querySelector('.mobile-nav-backdrop');
+    const overlay = document.querySelector('.mobile-nav-overlay, .homepage-mobile-nav');
     const toggleButton = document.querySelector('.mobile-nav-toggle, #mobile-nav-toggle');
     
     if (overlay && overlay.classList.contains('active')) {
         // Close if clicking outside the overlay and not on the toggle button
         if (!overlay.contains(e.target) && (!toggleButton || !toggleButton.contains(e.target))) {
-            closeMobileNav();
+            const isHomepage = document.querySelector('.hero-header') !== null;
+            if (isHomepage) {
+                closeHomepageMobileNav();
+            } else {
+                closeSubpageMobileNav();
+            }
         }
     }
 });
 
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-        closeMobileNav();
+        const isHomepage = document.querySelector('.hero-header') !== null;
+        if (isHomepage) {
+            closeHomepageMobileNav();
+        } else {
+            closeSubpageMobileNav();
+        }
     }
 });

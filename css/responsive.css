@@ -420,3 +420,108 @@ body.mobile-nav-open .mobile-nav-backdrop {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+/* Homepage-specific mobile navigation */
+@media (max-width: 768px) {
+    /* Homepage mobile navigation overlay */
+    .homepage-mobile-nav {
+        position: fixed !important;
+        top: 60px !important;
+        right: 15px !important;
+        width: 240px;
+        max-width: calc(100vw - 30px);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(8px) saturate(180%);
+        -webkit-backdrop-filter: blur(8px) saturate(180%);
+        border: 1px solid rgba(209, 213, 219, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+                    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        z-index: 99999 !important;
+        transform: translateY(-10px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        padding: 0.5rem 0;
+    }
+    
+    .homepage-mobile-nav.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    /* Homepage backdrop */
+    .homepage-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        z-index: 99990;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .homepage-backdrop.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+    
+    /* Ensure homepage mobile menu styling matches */
+    .homepage-mobile-nav .mobile-nav-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .homepage-mobile-nav .mobile-nav-menu li {
+        margin: 0;
+    }
+    
+    .homepage-mobile-nav .mobile-nav-menu li:not(:last-child) {
+        border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+    }
+    
+    .homepage-mobile-nav .mobile-nav-menu a {
+        display: block;
+        color: #1a202c;
+        font-size: 0.95rem;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        padding: 0.85rem 1.25rem;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        position: relative;
+        text-align: left;
+    }
+    
+    .homepage-mobile-nav .mobile-nav-menu a::after {
+        content: '';
+        position: absolute;
+        left: 1.25rem;
+        bottom: 0.7rem;
+        height: 2px;
+        width: 0;
+        background: #3498db;
+        transition: width 0.2s ease;
+    }
+    
+    .homepage-mobile-nav .mobile-nav-menu a:hover {
+        color: #3498db;
+        background: rgba(236, 240, 241, 0.6);
+    }
+    
+    .homepage-mobile-nav .mobile-nav-menu a:hover::after {
+        width: 20px;
+    }
+    
+    .homepage-mobile-nav .mobile-nav-menu a.active {
+        color: #3498db;
+        font-weight: 600;
+    }
+}
