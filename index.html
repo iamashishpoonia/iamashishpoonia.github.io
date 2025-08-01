@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal website of Ashish Poonia, PhD Candidate in Mathematics">
+    <title>Ashish Poonia | Mathematics Researcher</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+    <!-- Header is hidden on home page, but kept for subpages structure -->
+    <header class="site-header sticky-top d-none">
+        <div class="container">
+            <div class="header-wrapper">
+                <div class="site-branding">
+                    <a href="index.html" class="site-title">ASHISH POONIA</a>
+                </div>
+                
+                <button id="mobile-nav-toggle" class="mobile-nav-toggle d-md-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav class="main-navigation d-none d-md-block">
+                    <ul id="nav-menu" class="d-flex">
+                        <li><a href="pages/about.html">About</a></li>
+                        <li><a href="pages/research.html">Research</a></li>
+                        <li><a href="pages/publications.html">Publications</a></li>
+                        <li><a href="pages/activities.html">Activities</a></li>
+                        <li><a href="pages/interests.html">Interests</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    
+    <!-- Background Section (Top One-Third) -->
+    <section id="hero-background" class="hero-background-section">
+        <!-- Single Background Image -->
+        <div class="background-container">
+            <div class="background-image" style="background-image: url('assets/images/Home.png');"></div>
+            <div class="background-overlay"></div>
+        </div>
+        
+        <!-- Hero Header with Navigation -->
+        <div class="hero-header">
+            <div class="container">
+                <div class="hero-header-wrapper">
+                    <div class="hero-branding">
+                        <a href="index.html" class="hero-title">ASHISH POONIA</a>
+                    </div>
+                    
+                    <button id="hero-nav-toggle" class="mobile-nav-toggle d-md-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <nav class="hero-navigation d-none d-md-block">
+                        <ul class="hero-nav-menu d-flex">
+                            <li><a href="pages/about.html">About</a></li>
+                            <li><a href="pages/research.html">Research</a></li>
+                            <li><a href="pages/publications.html">Publications</a></li>
+                            <li><a href="pages/activities.html">Activities</a></li>
+                            <li><a href="pages/interests.html">Interests</a></li>
+                            <li><a href="pages/contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Overlapping Profile Photo (positioned between sections) -->
+    <div class="profile-photo-wrapper">
+        <div class="profile-photo-container">
+            <img src="assets/images/My Photo.JPG" alt="Ashish Poonia" class="profile-photo">
+        </div>
+    </div>
+    
+    <!-- Main Content Section -->
+    <section id="hero-content" class="hero-content-section">
+        <div class="container">
+            <!-- Profile Details -->
+            <div class="profile-details text-center">
+                <h1 class="fade-in">Ashish Poonia</h1>
+                <p class="designation slide-up delay-100">PhD Candidate in Mathematics</p>
+                <p class="affiliation">Department of Mathematics, IIT Guwahati</p>
+                <p class="research-focus">Epidemiological & Ecological Modeling</p>
+                <p class="tagline">exploring natural processes through mathematics</p>
+                
+                <div class="social-icons my-4">
+                    <a href="mailto:apoonia@iitg.ac.in" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com/in/iamashishpoonia" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/ashishpoonia" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://scholar.google.com/citations?user=Uazlop8AAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                    <a href="https://www.researchgate.net/profile/Ashish-Poonia-2?ev=hdr_xprf" target="_blank" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add page loaded class for transition effects
+            setTimeout(function() {
+                document.body.classList.add('page-loaded');
+            }, 100);
+            
+            // Mobile Navigation for Hero Header
+            const heroNavToggle = document.getElementById('hero-nav-toggle');
+            const heroNavMenu = document.querySelector('.hero-navigation');
+            
+            if (heroNavToggle) {
+                heroNavToggle.addEventListener('click', function() {
+                    heroNavMenu.classList.toggle('d-none');
+                    heroNavMenu.classList.toggle('d-block');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

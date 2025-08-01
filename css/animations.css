@@ -1,0 +1,119 @@
+/* Animation styles for the academic website */
+
+/* Add color transition effects */
+.card, section, .timeline-item, .btn {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Gradient background animation for math visualization */
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+#math-visualization {
+  background: linear-gradient(-45deg, var(--dark-bg), var(--gradient-start), var(--secondary-color), var(--accent-color));
+  background-size: 400% 400%;
+  animation: gradientBackground 15s ease infinite;
+}
+
+/* Fade-in animation - smoother with better timing function */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+    will-change: opacity; /* Hardware acceleration hint */
+}
+
+/* Slide up animation - smoother with better timing function */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-up {
+    animation: slideUp 0.7s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    will-change: transform, opacity; /* Hardware acceleration hint */
+}
+
+/* Animation delays - using ms for more precise control */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* Subtle highlight animation */
+@keyframes subtleHighlight {
+    0% { box-shadow: 0 0 10px rgba(0, 123, 255, 0); }
+    50% { box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); }
+    100% { box-shadow: 0 0 10px rgba(0, 123, 255, 0); }
+}
+
+.subtle-highlight {
+    animation: subtleHighlight 2s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
+}
+
+/* Scale animation */
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.scale-in {
+    animation: scaleIn 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
+    will-change: transform, opacity;
+}
+
+.scale-in {
+    animation: scaleIn 0.6s ease-out;
+}
+
+/* For animate-on-scroll elements */
+[data-animation="fade-in"] {
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+[data-animation="slide-up"] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1),
+                transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+[data-animation].animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Add smooth transitions for all interactive elements */
+a, button, .card, .social-icons a {
+    transition: all 0.25s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* Page transition effect */
+.page-loaded {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.page-transitioning {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}

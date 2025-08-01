@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal interests and hobbies of Ashish Poonia, PhD Candidate in Mathematics">
+    <title>Ashish Poonia | Interests & Hobbies</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    
+    <!-- Custom Tab Styles -->
+    <style>
+        .interests-tabs .nav-underline .nav-link {
+            color: #6c757d;
+            border: none;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+        }
+        
+        .interests-tabs .nav-underline .nav-link:hover {
+            color: #333;
+            border-bottom-color: #dee2e6;
+        }
+        
+        .interests-tabs .nav-underline .nav-link.active {
+            color: #333;
+            border-bottom-color: #333;
+            background: none;
+        }
+        
+        .tab-content {
+            margin-top: 2rem;
+        }
+        
+        .tab-pane h3 {
+            color: #333;
+            font-weight: 600;
+        }
+        
+        /* Book list custom styling */
+        .book-title-line {
+            display: block;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+        
+        .book-summary-toggle {
+            display: block;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+        
+        .book-summary-toggle span {
+            display: inline-block;
+        }
+        
+        .summary-content {
+            display: block;
+            width: 100%;
+            margin-top: 5px;
+        }
+        
+        /* Non-Bootstrap Readings Section CSS */
+        .readings-content {
+            display: block;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .readings-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .readings-main {
+            flex: 1;
+            max-width: 66.666%;
+            padding-right: 2rem;
+        }
+        
+        .readings-sidebar {
+            flex: 0 0 33.333%;
+            max-width: 33.333%;
+        }
+        
+        .readings-title {
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 600;
+            font-size: 1.75rem;
+        }
+        
+        .readings-intro {
+            text-align: justify;
+            margin-bottom: 2rem;
+        }
+        
+        .library-title {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+        
+        .book-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .book-item {
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .book-header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0.5rem;
+        }
+        
+        .book-title-line {
+            margin-bottom: 5px;
+        }
+        
+        .book-icon {
+            color: #6c757d;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+        }
+        
+        .book-title {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .book-author {
+            color: #6c757d;
+            font-size: 0.875rem;
+        }
+        
+        .summary-link {
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+            padding: 0;
+        }
+        
+        .summary-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .summary-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .summary-hidden {
+            display: none !important;
+            visibility: hidden !important;
+            width: 100%;
+            margin-left: 0;
+        }
+        
+        .summary-content {
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 0.375rem;
+            margin-top: 0.5rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .summary-text {
+            margin: 0;
+            color: #6c757d;
+            font-size: 0.875rem;
+        }
+        
+        .authors-title {
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        
+        .authors-text {
+            font-size: 0.875rem;
+            color: #6c757d;
+            margin: 0;
+        }
+        
+        .reading-links {
+            margin-top: 0.5rem;
+        }
+        
+        .reading-link {
+            margin: 0.25rem 0;
+            font-size: 0.875rem;
+        }
+        
+        .reading-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .reading-link a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+        
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .readings-container {
+                flex-direction: column;
+            }
+            
+            .readings-main,
+            .readings-sidebar {
+                flex: none;
+                max-width: 100%;
+            }
+            
+            .readings-main {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        .tab-pane h4, .tab-pane h5 {
+            color: #555;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .interests-tabs .nav-underline .nav-link {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Photography Gallery Styles */
+        .row.g-3 img {
+            aspect-ratio: 1;
+            object-fit: cover;
+        }
+        
+        /* Book List Styles */
+        .book-item {
+            padding-bottom: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .book-header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+        }
+        
+        .book-icon {
+            width: 24px;
+            text-align: center;
+        }
+        
+        .book-title {
+            color: #333;
+            font-size: 0.95rem;
+        }
+        
+        .book-author {
+            font-size: 0.85rem;
+        }
+        
+        .summary-content {
+            margin-left: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header sticky-top">
+        <div class="container">
+            <div class="header-wrapper">
+                <div class="site-branding">
+                    <a href="../index.html" class="site-title" style="display:inline-block; position:relative; z-index:100; cursor:pointer;">ASHISH POONIA</a>
+                </div>
+                
+                <button id="mobile-nav-toggle" class="mobile-nav-toggle d-md-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav class="main-navigation d-none d-md-block">
+                    <ul id="nav-menu" class="d-flex">
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="research.html">Research</a></li>
+                        <li><a href="publications.html">Publications</a></li>
+                        <li><a href="activities.html">Activities</a></li>
+                        <li><a href="interests.html" class="active">Interests</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="text-center mb-5">
+                        <h1 class="mb-3">Interests</h1>
+                        <p class="lead">Beyond mathematics, I find inspiration and balance through diverse pursuits that enrich my perspective and fuel my creativity.</p>
+                    </div>
+
+                    <!-- Tab Navigation -->
+                    <div class="interests-tabs mb-4">
+                        <ul class="nav nav-underline justify-content-center" id="interestsTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="photography-tab" data-bs-toggle="tab" data-bs-target="#photography" type="button" role="tab" aria-controls="photography" aria-selected="true">Photography</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="readings-tab" data-bs-toggle="tab" data-bs-target="#readings" type="button" role="tab" aria-controls="readings" aria-selected="false">Readings</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="others-tab" data-bs-toggle="tab" data-bs-target="#others" type="button" role="tab" aria-controls="others" aria-selected="false">Others</button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content" id="interestsTabContent">
+                        <!-- Photography Tab -->
+                        <div class="tab-pane fade show active" id="photography" role="tabpanel" aria-labelledby="photography-tab">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 class="mb-3">Photography</h3>
+                                    
+                                    <p class="text-center mb-4 fst-italic text-muted">
+                                        "Look deep into nature, and then you will understand everything better." — Albert Einstein
+                                    </p>
+                                    
+                                    <p class="text-justify">Photography serves as my primary creative outlet and a way to connect with the natural world. My interest in photography began during the early days of my graduation. One of my close friends, an environmentalist and bird watcher, had a point-and-shoot camera. I borrowed it for a few days, and that's how it all started. We often went out together, exploring the campus and nearby areas to spot birds and capture moments from nature. That experience not only introduced me to photography but also deepened my appreciation for wildlife and natural spaces. As my interest grew, I started experimenting with different cameras by renting or borrowing them whenever possible. When I joined IIT Guwahati as a PhD student, I finally bought my first gear using my first scholarship, a Canon 90D with an 18–135mm lens. With that, I expanded beyond wildlife photography and started capturing landscapes, macros, streets and portraits. Over time, I've built a small but diverse portfolio that reflects the way I observe life — quietly, curiously, and with a bit of wonder.</p>
+                                    
+                                    <h4 class="mt-4 mb-3">Through My Lens</h4>
+                                    <p class="text-justify mb-4">A collection of photographs capturing the beauty found in nature, landscapes, and wildlife. You can see more of my photography on <a href="https://www.instagram.com/photowale_chacha/" target="_blank">Instagram</a>.</p>
+                                    
+                                    <div class="row g-3">
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 1.jpeg" alt="Photography 1" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 2.jpeg" alt="Photography 2" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 3.jpeg" alt="Photography 3" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 4.jpeg" alt="Photography 4" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 5.jpeg" alt="Photography 5" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 6.jpeg" alt="Photography 6" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 7.jpeg" alt="Photography 7" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 8.jpeg" alt="Photography 8" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 9.jpeg" alt="Photography 9" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 10.jpeg" alt="Photography 10" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 11.jpeg" alt="Photography 11" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 12.jpeg" alt="Photography 12" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 13.jpeg" alt="Photography 13" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 14.jpeg" alt="Photography 14" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                        <div class="col-md col-sm-6" style="flex: 0 0 20%; max-width: 20%;">
+                                            <img src="../assets/images/Photography - 15.jpeg" alt="Photography 15" class="img-fluid rounded shadow-sm">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Readings Tab -->
+                        <div class="tab-pane fade" id="readings" role="tabpanel" aria-labelledby="readings-tab">
+                            <div class="readings-content">
+                                <h3 class="readings-title">Readings</h3>
+                                
+                                <p class="text-center mb-4 fst-italic text-muted">
+                                    "The reading of all good books is like a conversation with the finest minds of past centuries." — René Descartes
+                                </p>
+                                
+                                <p class="readings-intro">Reading across different subjects helps me stay curious and often brings new perspectives into my research. I'm especially drawn to books, essays, and articles that explore the intersection of science, health, philosophy, sports, and human experience. Whether it's something about science, everyday life, or just an interesting idea explained in a simple way, I enjoy revisiting certain websites and writers because they always make me think and learn something new.</p>
+                                
+                                <div class="readings-container">
+                                    <div class="readings-main">
+                                        <h4 class="library-title">My Library</h4>
+                                        
+                                        <div class="book-list">
+                                            <div class="book-item">
+                                                <div class="book-title-line">
+                                                    <i class="fas fa-book book-icon"></i><span class="book-title">The Almanack Of Naval Ravikant: A Guide to Wealth and Happiness</span><span class="book-author"> by Eric Jorgenson</span>
+                                                </div>
+                                                <p class="summary-link"><a href="#" onclick="toggleSummary('summary1'); return false;">Summary</a></p>
+                                                <div class="summary-hidden" id="summary1">
+                                                    <div class="summary-content">
+                                                        <p class="summary-text">This compilation of Naval Ravikant's wisdom offers profound insights into building wealth and finding happiness through rational thinking and long-term perspectives. Naval's approach to decision-making, emphasizing first principles and leveraging specific knowledge, resonates with mathematical problem-solving strategies. His philosophy on wealth creation through equity and understanding compound effects aligns with mathematical modeling of growth systems.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="book-item">
+                                                <div class="book-title-line">
+                                                    <i class="fas fa-book book-icon"></i><span class="book-title">Masala Lab: The Science of Indian Cooking</span><span class="book-author"> by Krish Ashok</span>
+                                                </div>
+                                                <p class="summary-link"><a href="#" onclick="toggleSummary('summary2'); return false;">Summary</a></p>
+                                                <div class="summary-hidden" id="summary2">
+                                                    <div class="summary-content">
+                                                        <p class="summary-text">Krish Ashok brilliantly demystifies Indian cooking through scientific principles, showing how chemistry, physics, and biology govern traditional techniques. His systematic approach to understanding spice combinations, heat transfer, and flavor development mirrors mathematical optimization problems. The book demonstrates how traditional wisdom often contains sophisticated scientific principles, much like how mathematical insights emerge from seemingly simple patterns.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="book-item">
+                                                <div class="book-title-line">
+                                                    <i class="fas fa-book book-icon"></i><span class="book-title">Black Box Thinking</span><span class="book-author"> by Matthew Syed</span>
+                                                </div>
+                                                <p class="summary-link"><a href="#" onclick="toggleSummary('summary3'); return false;">Summary</a></p>
+                                                <div class="summary-hidden" id="summary3">
+                                                    <div class="summary-content">
+                                                        <p class="summary-text">Syed's exploration of learning from failure and creating systems for continuous improvement has transformed how I approach research methodology. His concept of "black box thinking" - learning from mistakes rather than hiding them - is crucial in mathematical research where failed approaches often reveal important insights. The book emphasizes the importance of feedback loops and iterative improvement, principles fundamental to both mathematical problem-solving and scientific progress.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="readings-sidebar">
+                                        <div class="favorite-authors">
+                                            <h5 class="authors-title">Favorite Authors</h5>
+                                            <p class="authors-text">Nassim Nicholas Taleb, Tim Ferriss, Carl Sagan, Krish Ashok, Morgan Housel, Steven Pinker, David Attenborough, and Robert Sapolsky for their ability to bridge scientific thinking with human experience.</p>
+                                            
+                                            <h5 class="authors-title" style="margin-top: 2rem;">My Web Bookmarks</h5>
+                                            <div class="reading-links">
+                                                <p class="reading-link"><a href="https://nav.al/" target="_blank" rel="noopener noreferrer">Naval Ravikant</a></p>
+                                                <p class="reading-link"><a href="https://www.quantamagazine.org/" target="_blank" rel="noopener noreferrer">Quanta Magazine</a></p>
+                                                <p class="reading-link"><a href="https://paulgraham.com/index.html" target="_blank" rel="noopener noreferrer">Paul Graham</a></p>
+                                                <p class="reading-link"><a href="https://masalalab.in/" target="_blank" rel="noopener noreferrer">The Masala Lab</a></p>
+                                                <p class="reading-link"><a href="https://www.hubermanlab.com/newsletter" target="_blank" rel="noopener noreferrer">Huberman Lab</a></p>
+                                                <p class="reading-link"><a href="https://examine.com/" target="_blank" rel="noopener noreferrer">Health & Nutrition</a></p>
+                                                <p class="reading-link"><a href="https://nautil.us/" target="_blank" rel="noopener noreferrer">Nautilus</a></p>
+                                                <p class="reading-link"><a href="https://aeon.co/" target="_blank" rel="noopener noreferrer">Aeon</a></p>
+                                                <p class="reading-link"><a href="https://worksinprogress.co/" target="_blank" rel="noopener noreferrer">Works in Progress</a></p>
+                                                <p class="reading-link"><a href="https://meltingasphalt.com/" target="_blank" rel="noopener noreferrer">Kevin Simler</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Others Tab -->
+                        <div class="tab-pane fade" id="others" role="tabpanel" aria-labelledby="others-tab">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 class="mb-3">Other Interests</h3>
+                                    <p class="text-justify">Beyond photography and reading, I maintain several hobbies that provide balance and often unexpected connections with myself and with the world around me.</p>
+
+                                    <ul class="mt-4">
+                                        <li>Cooking</li>
+                                        <li>Running</li>
+                                        <li>Travelling</li>
+                                        <li>Watching sports</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/iamashishpoonia" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/yourusername" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.researchgate.net/profile/Ashish-Poonia-2?ev=hdr_xprf" target="_blank" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
+                <a href="https://scholar.google.com/citations?user=Uazlop8AAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+            </div>
+            <p>&copy; 2025 Ashish Poonia. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    
+    <!-- Initialize AOS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS if available
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    easing: 'ease-out-cubic',
+                    once: true,
+                    offset: 100
+                });
+            }
+        });
+        
+        // Instant toggle function for book summaries (no Bootstrap)
+        function toggleSummary(elementId) {
+            console.log('Toggle called for:', elementId); // Debug log
+            const element = document.getElementById(elementId);
+            console.log('Element found:', element); // Debug log
+            if (element) {
+                const isHidden = element.style.display === 'none' || 
+                               element.style.display === '' || 
+                               element.classList.contains('summary-hidden');
+                
+                if (isHidden) {
+                    element.style.display = 'block';
+                    element.style.visibility = 'visible';
+                    element.classList.remove('summary-hidden');
+                    console.log('Showing element'); // Debug log
+                } else {
+                    element.style.display = 'none';
+                    element.style.visibility = 'hidden';
+                    element.classList.add('summary-hidden');
+                    console.log('Hiding element'); // Debug log
+                }
+            } else {
+                console.log('Element not found with ID:', elementId); // Debug log
+            }
+        }
+        
+        // Initialize summary elements as hidden
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing summaries'); // Debug log
+            const summaryElements = document.querySelectorAll('.summary-hidden');
+            console.log('Found summary elements:', summaryElements.length); // Debug log
+            summaryElements.forEach(function(element) {
+                element.style.display = 'none';
+                element.style.visibility = 'hidden';
+                console.log('Hiding element:', element.id); // Debug log
+            });
+            
+            // Also hide by ID in case class isn't working
+            for (let i = 1; i <= 7; i++) {
+                const element = document.getElementById('summary' + i);
+                if (element) {
+                    element.style.display = 'none';
+                    element.style.visibility = 'hidden';
+                    console.log('Force hiding element:', 'summary' + i); // Debug log
+                }
+            }
+        });
+    </script>
+</body>
+</html>
