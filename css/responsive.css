@@ -101,14 +101,14 @@
         transform: scale(0.95);
         opacity: 0;
         transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        z-index: 99999;
+        z-index: 999999;
         padding: 0.5rem 0;
         margin-top: 5px;
     }
     
     /* Ensure dropdown appears above hero section elements */
     .hero-header .mobile-nav-overlay {
-        z-index: 99999 !important;
+        z-index: 999999 !important;
         position: absolute !important;
     }
     
@@ -123,6 +123,16 @@
     .mobile-nav-overlay.active {
         visibility: visible !important;
         display: block !important;
+    }
+    
+    /* Specific override for homepage dropdown above profile photo */
+    body .hero-header .mobile-nav-overlay.active {
+        z-index: 999999 !important;
+        position: absolute !important;
+        visibility: visible !important;
+        display: block !important;
+        opacity: 1 !important;
+        transform: scale(1) !important;
     }
     
     @keyframes slideDown {
@@ -350,6 +360,12 @@ body.mobile-nav-open .mobile-nav-backdrop {
     overflow: visible;
 }
 
+/* Create a new stacking context for hero header */
+.hero-header {
+    z-index: 999990 !important;
+    position: relative !important;
+}
+
 /* Special handling for hero background section to allow dropdown overflow */
 .hero-background-section {
     overflow: visible !important;
@@ -360,6 +376,7 @@ body.mobile-nav-open .mobile-nav-backdrop {
 .hero-header .container {
     position: relative;
     overflow: visible;
+    z-index: inherit;
 }
 
 /* Ensure header wrapper allows dropdown overflow */
@@ -367,6 +384,7 @@ body.mobile-nav-open .mobile-nav-backdrop {
 .hero-header-wrapper {
     overflow: visible;
     position: relative;
+    z-index: inherit;
 }
 
 @keyframes fadeBgIn {
