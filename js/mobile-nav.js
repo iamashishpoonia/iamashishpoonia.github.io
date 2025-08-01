@@ -24,8 +24,9 @@ window.addEventListener('resize', function() {
         if (overlay) {
             overlay.remove();
         }
-        // Restore scrolling
+        // Restore scrolling and remove mobile nav class
         document.body.style.overflow = '';
+        document.body.classList.remove('mobile-nav-open');
     } else {
         // Mobile mode - create overlay if it doesn't exist
         if (!overlay && !document.querySelector('.mobile-nav-overlay')) {
@@ -40,6 +41,12 @@ function createMobileNavigation() {
     if (document.querySelector('.mobile-nav-overlay')) {
         return;
     }
+    
+    // Create backdrop for clicking outside
+    const backdrop = document.createElement('div');
+    backdrop.className = 'mobile-nav-backdrop';
+    backdrop.addEventListener('click', closeMobileNav);
+    document.body.appendChild(backdrop);
     
     // Get navigation links from existing nav (prioritize main nav, fallback to hero nav)
     const mainNav = document.querySelector('.main-navigation ul, .main-navigation #nav-menu');
@@ -76,8 +83,24 @@ function createMobileNavigation() {
     // Assemble overlay (just the menu, no close button)
     mobileOverlay.appendChild(mobileMenu);
     
-    // Add to body with fixed positioning
-    document.body.appendChild(mobileOverlay);
+    // Try to add to header container, check both site-header and hero-header
+    let headerContainer = document.querySelector('.site-header .container:not(.d-none)');
+    if (!headerContainer || headerContainer.closest('.d-none')) {
+        // If site-header is hidden (like on home page), use hero-header
+        headerContainer = document.querySelector('.hero-header .container');
+    }
+    
+    if (headerContainer) {
+        console.log('Adding dropdown to header container');
+        headerContainer.appendChild(mobileOverlay);
+    } else {
+        console.log('Adding dropdown to body (fallback)');
+        // Use fixed positioning as fallback
+        mobileOverlay.style.position = 'fixed';
+        mobileOverlay.style.top = '60px';
+        mobileOverlay.style.right = '10px';
+        document.body.appendChild(mobileOverlay);
+    }
 }
 
 function setupMobileNavigation() {
@@ -90,7 +113,16 @@ function setupMobileNavigation() {
         button.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            openMobileNav();
+            
+            // Check if navigation is currently open
+            const overlay = document.querySelector('.mobile-nav-overlay');
+            if (overlay && overlay.classList.contains('active')) {
+                // If open, close it
+                closeMobileNav();
+            } else {
+                // If closed, open it
+                openMobileNav();
+            }
         });
     });
 }
@@ -98,27 +130,46 @@ function setupMobileNavigation() {
 function openMobileNav() {
     const overlay = document.querySelector('.mobile-nav-overlay');
     if (overlay) {
+        // Add classes to control display without locking scroll
         overlay.classList.add('active');
         document.body.classList.add('mobile-nav-open');
+        
+        // Update toggle button icon to cross (X)
+        const toggleButtons = document.querySelectorAll('.mobile-nav-toggle i, #mobile-nav-toggle i');
+        toggleButtons.forEach(button => {
+            if (button) {
+                button.className = 'fas fa-times';
+            }
+        });
     }
 }
 
 function closeMobileNav() {
     const overlay = document.querySelector('.mobile-nav-overlay');
     if (overlay) {
+        // Remove classes
         overlay.classList.remove('active');
         document.body.classList.remove('mobile-nav-open');
+        
+        // Update toggle button icon back to hamburger menu
+        const toggleButtons = document.querySelectorAll('.mobile-nav-toggle i, #mobile-nav-toggle i');
+        toggleButtons.forEach(button => {
+            if (button) {
+                button.className = 'fas fa-bars';
+            }
+        });
     }
 }
 
 // Close mobile nav when clicking outside or pressing escape
 document.addEventListener('click', function(e) {
     const overlay = document.querySelector('.mobile-nav-overlay');
+    const backdrop = document.querySelector('.mobile-nav-backdrop');
     const toggleButton = document.querySelector('.mobile-nav-toggle, #mobile-nav-toggle');
     
     if (overlay && overlay.classList.contains('active')) {
         // Close if clicking outside the overlay and not on the toggle button
-        if (!overlay.contains(e.target) && !toggleButton.contains(e.target)) {
+        if (!overlay.contains(e.target) && (!toggleButton || !toggleButton.contains(e.target))) {
             closeMobileNav();
         }
     }
