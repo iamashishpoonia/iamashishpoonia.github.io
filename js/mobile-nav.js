@@ -83,24 +83,14 @@ function createMobileNavigation() {
     // Assemble overlay (just the menu, no close button)
     mobileOverlay.appendChild(mobileMenu);
     
-    // Try to add to header container, check both site-header and hero-header
-    let headerContainer = document.querySelector('.site-header .container:not(.d-none)');
-    if (!headerContainer || headerContainer.closest('.d-none')) {
-        // If site-header is hidden (like on home page), use hero-header
-        headerContainer = document.querySelector('.hero-header .container');
-    }
+    // Always attach to body with fixed positioning - same as other pages working approach
+    mobileOverlay.style.position = 'fixed';
+    mobileOverlay.style.top = '60px';
+    mobileOverlay.style.right = '10px';
+    mobileOverlay.style.zIndex = '9999999';
     
-    if (headerContainer) {
-        console.log('Adding dropdown to header container');
-        headerContainer.appendChild(mobileOverlay);
-    } else {
-        console.log('Adding dropdown to body (fallback)');
-        // Use fixed positioning as fallback
-        mobileOverlay.style.position = 'fixed';
-        mobileOverlay.style.top = '60px';
-        mobileOverlay.style.right = '10px';
-        document.body.appendChild(mobileOverlay);
-    }
+    document.body.appendChild(mobileOverlay);
+    console.log('Mobile dropdown attached to body with fixed positioning');
 }
 
 function setupMobileNavigation() {
